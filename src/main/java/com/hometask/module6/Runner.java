@@ -1,5 +1,7 @@
 package com.hometask.module6;
 
+import java.util.HashMap;
+
 public class Runner {
 
     public static void main(String[] args) throws ExceptionInName, ExceptionOfQuantityInOrder {
@@ -7,21 +9,55 @@ public class Runner {
         musicToolsShop.addToShop(new Guitar(), 16);
         musicToolsShop.addToShop(new Piano(), 2);
         musicToolsShop.addToShop(new Trumpet(), 7);
-        System.out.println(musicToolsShop.toString());
+        MusicToolsShop.printShop(musicToolsShop);
 
-        Order order = new Order();
-        order.addToOrder("Guitar", 7);
-        order.addToOrder("Trumpet", 2);
-        musicToolsShop.startUp(order.getOrderedMusicInstruments());
-        Order order2 = new Order();
-        order2.addToOrder("Piano", 1);
+        //case 1: ok
+        musicToolsShop.removeMusicTools(new HashMap<String, Integer>() {
+            {
+                put(InstrumentType.GUITAR.toString(), 7);
+                put(InstrumentType.TRUMPET.toString(), 2);
+            }
+        });
+        MusicToolsShop.printShop(musicToolsShop);
 
-        musicToolsShop.startUp(order2.getOrderedMusicInstruments());
-        Order order3 = new Order();
-        order3.addToOrder("Piano", 1);
-        order3.addToOrder("Guitar", 8);
-        order3.addToOrder("Trumpet", 6);
-        musicToolsShop.startUp(order3.getOrderedMusicInstruments());
+        //case 2: not enough piano
+        try {
+            musicToolsShop.removeMusicTools(new HashMap<String, Integer>() {
+                {
+                    put(InstrumentType.PIANO.toString(), 3);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        MusicToolsShop.printShop(musicToolsShop);
+
+        //case 3:wrong key
+        try {
+            musicToolsShop.removeMusicTools(new HashMap<String, Integer>() {
+                {
+                    put("balalayka", 3);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        MusicToolsShop.printShop(musicToolsShop);
+
+        //case 4: wrong quantity
+
+        try {
+            musicToolsShop.removeMusicTools(new HashMap<String, Integer>() {
+                {
+                    put(InstrumentType.GUITAR.toString(), -2);
+                }
+            });
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        MusicToolsShop.printShop(musicToolsShop);
+
     }
 }
 

@@ -2,15 +2,7 @@ package com.hometask.module6;
 
 public class ExceptionOfQuantityInOrder extends Exception {
 
-    private int quantity;
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public ExceptionOfQuantityInOrder(String message, Integer quantity) {
-
+    public ExceptionOfQuantityInOrder(String message) {
         super(message);
-        this.quantity = quantity;
     }
 }

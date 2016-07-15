@@ -4,6 +4,6 @@ public class Trumpet implements MusicTool {
 
     @Override
     public String getName() {
-        return "Trumpet";
+        return "TRUMPET";
     }
 }

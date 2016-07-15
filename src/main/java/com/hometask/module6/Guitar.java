@@ -4,7 +4,7 @@ public class Guitar implements MusicTool {
 
     @Override
     public String getName() {
-        return "Guitar";
+        return "GUITAR";
     }
 }
 
